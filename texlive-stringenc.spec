@@ -1,6 +1,6 @@
 Name:		texlive-stringenc
 Version:	52982
-Release:	1
+Release:	2
 Summary:	Converting a string between different encodings
 Group:		Publishing
 URL:		http://www.ctan.org/tex-archive/macros/latex/contrib/stringenc
