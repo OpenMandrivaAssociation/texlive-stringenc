@@ -1,40 +1,22 @@
-Name:		texlive-stringenc
-Version:	52982
-Release:	2
+%global tl_name stringenc
+%global tl_revision 79461
+
+Name:		texlive-%{tl_name}
+Epoch:		1
+Version:	1.12
+Release:	%{tl_revision}.1
 Summary:	Converting a string between different encodings
 Group:		Publishing
 URL:		https://www.ctan.org/tex-archive/macros/latex/contrib/stringenc
 License:	lppl1.3
-Source0:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/stringenc.r%{version}.tar.xz
-Source1:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/stringenc.doc.r%{version}.tar.xz
-Source2:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/stringenc.source.r%{version}.tar.xz
+Source0:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/stringenc.r%{tl_revision}.tar.xz
+Source1:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/stringenc.doc.r%{tl_revision}.tar.xz
+Source2:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/stringenc.source.r%{tl_revision}.tar.xz
 BuildArch:	noarch
-BuildRequires:	texlive-tlpkg
-Requires(pre):	texlive-tlpkg
-Requires(post):	texlive-kpathsea
+BuildSystem:	texlive
+Provides:	texlive(%{tl_name}) = %{tl_revision}
 
 %description
-This package provides \StringEncodingConvert for converting a
-string between different encodings. Both LaTeX and plain-TeX
-are supported.
+This package provides \StringEncodingConvert for converting a string
+between different encodings. Both LaTeX and plain-TeX are supported.
 
-%prep
-%setup -c -a1 -a2
-%autopatch -p1
-
-%build
-
-%install
-rm -rf tlpkg
-mkdir -p %{buildroot}%{_texmfdistdir}
-cp -a * %{buildroot}%{_texmfdistdir}
-
-%files
-%doc %{_texmfdistdir}/source/latex/stringenc
-%{_texmfdistdir}/tex/generic/stringenc
-%doc %{_texmfdistdir}/doc/latex/stringenc
-
-%post -p %{_sbindir}/texlive.post
-
-%postun
-[ "$1" -eq 0 ] && %{_sbindir}/texlive.post
